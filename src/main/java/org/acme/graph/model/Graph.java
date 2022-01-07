@@ -113,12 +113,26 @@ public class Graph {
 		return vertex.getOutEdges();
 	}
 
+	/**
+	 * 
+	 * @param coordinate
+	 * @param id
+	 * @return a Vertex
+	 */
 	public Vertex createVertex(Coordinate coordinate, String id){
 		Vertex aVertex = new Vertex(coordinate, id);
 		this.vertices.add(aVertex);
 		return aVertex;
 	}
 
+	/**
+	 * 
+	 * @param source
+	 * @param target
+	 * @param id
+	 * @param geometry
+	 * @return a Edge
+	 */
 	public Edge createEdge(Vertex source, Vertex target, String id, LineString geometry){
 		Edge aEdge = new Edge(source,target);
 		aEdge.setId(id);

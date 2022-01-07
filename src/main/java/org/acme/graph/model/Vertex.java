@@ -38,6 +38,11 @@ public class Vertex {
 	 */
 	private boolean visited;
 
+	/**
+	 * 
+	 * @param coordinate
+	 * @param id
+	 */
 	Vertex(Coordinate coordinate, String id) {
 		this.coordinate = coordinate;
 		this.id = id;
@@ -92,7 +97,7 @@ public class Vertex {
 
 	@JsonIgnore
 	private List<Edge> inEdges = new ArrayList<Edge>();
-	
+
 	@JsonIgnore
 	private List<Edge> outEdges = new ArrayList<Edge>();
 

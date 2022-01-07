@@ -37,6 +37,11 @@ public class Edge {
 
 	private LineString geometry;
 
+	/**
+	 * 
+	 * @param source
+	 * @param target
+	 */
 	Edge(Vertex source, Vertex target){
 		if(source == null || target == null) {
 		System.out.println("Les arguments ne peuvent etre nuls !");
