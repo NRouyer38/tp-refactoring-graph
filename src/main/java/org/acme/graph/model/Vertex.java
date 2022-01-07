@@ -35,8 +35,9 @@ public class Vertex {
 	 */
 	private boolean visited;
 
-	Vertex() {
-
+	Vertex(Coordinate coordinate, String id) {
+		this.coordinate = coordinate;
+		this.id = id;
 	}
 
 	public String getId() {

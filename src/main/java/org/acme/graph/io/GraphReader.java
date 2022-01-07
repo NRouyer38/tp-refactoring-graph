@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import org.acme.graph.model.Graph;
 import org.acme.graph.model.Vertex;
 import org.geotools.data.DataStore;
@@ -79,6 +80,7 @@ public class GraphReader {
 
 		/* Récupération de la géométrie dans le sens direct */
 		LineString geometry = toLineString(feature);
+		LineString reverseGeometry = geometry.reverse();
 
 		/* Création ou récupération des sommets initiaux et finaux */
 		Vertex source = graph.getOrCreateVertex(geometry.getStartPoint().getCoordinate());
@@ -89,11 +91,13 @@ public class GraphReader {
 
 		/* Création de l'arc pour le parcours en sens direct */
 		if (sens.equals(DOUBLE_SENS) || sens.equals(SENS_DIRECT)) {
-			graph.createEdge(source,target,id + "-direct");
+			graph.createEdge(source,target,id + "-direct",geometry);
+			
 		}
 		if (sens.equals(DOUBLE_SENS) || sens.equals(SENS_INVERSE)) {
 			/* Création de l'arc pour le parcours en sens opposé */
-			graph.createEdge(target,source,id + "-reverse");
+			graph.createEdge(target,source,id + "-reverse", reverseGeometry);
+
 		}
 	}
 

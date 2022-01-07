@@ -5,6 +5,7 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineString;
 
 import org.n52.jackson.datatype.jts.GeometrySerializer;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -34,6 +35,8 @@ public class Edge {
 	 */
 	private Vertex target;
 
+	private LineString geometry;
+
 	Edge(Vertex source, Vertex target){
 		if(source == null || target == null) {
 		System.out.println("Les arguments ne peuvent etre nuls !");
@@ -41,7 +44,7 @@ public class Edge {
 		}
 		else {
 		this.source = source;
-		this.target = target;
+		this.target = target;	
 		}
 	}
 
@@ -52,6 +55,10 @@ public class Edge {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public void setGeometry(LineString geometry) {
+		this.geometry = geometry;
+		}
 
 	/**
 	 * Source avec rendu JSON sous forme d'identifiant
@@ -81,11 +88,18 @@ public class Edge {
 	 * @return
 	 */
 	public double getCost() {
-		return source.getCoordinate().distance(target.getCoordinate());
+		if (geometry == null) {
+			return 0;
+		} else {
+			return geometry.getLength();
+		}
 	}
 
 	@JsonSerialize(using = GeometrySerializer.class)
 	public LineString getGeometry() {
+		if (this.geometry != null) {
+			return this.geometry;
+		}
 		GeometryFactory gf = new GeometryFactory();
 		return gf.createLineString(new Coordinate[] {
 			source.getCoordinate(),

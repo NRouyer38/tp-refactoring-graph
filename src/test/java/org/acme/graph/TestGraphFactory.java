@@ -4,6 +4,7 @@ import org.acme.graph.model.Graph;
 import org.acme.graph.model.Vertex;
 import org.locationtech.jts.geom.Coordinate;
 
+
 public class TestGraphFactory {
 
 	/**
@@ -19,9 +20,9 @@ public class TestGraphFactory {
 		Vertex c = graph.createVertex(new Coordinate(2.0, 0.0), "c");
 		Vertex d = graph.createVertex(new Coordinate(1.0, 1.0), "d");
 
-		graph.createEdge(a,b, "ab");
-		graph.createEdge(b,c, "bc");
-		graph.createEdge(a,d, "ad");
+		graph.createEdge(a,b, "ab", null);
+		graph.createEdge(b,c, "bc", null);
+		graph.createEdge(a,d, "ad", null);
 		
 		return graph;
 	}
